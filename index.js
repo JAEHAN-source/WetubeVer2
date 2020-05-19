@@ -7,11 +7,15 @@ function handleListening() {
     console.log(`Listening on: http://localhost:${PORT}`);
 }
 
-const handleHome = (req, res) => res.send("welcome to home");
-
-function handleProfile(req, res) {
-    res.send("you are on my profile");
+const middleware = (req, res, next) => {
+    console.log("between");
+    next();
 }
+
+const handleHome = (req, res) => res.send("welcome to home");
+const handleProfile = (req, res) => res.send("your profile");
+
+app.use(middleware);
 
 app.get("/", handleHome);
 app.get("/profile", handleProfile);

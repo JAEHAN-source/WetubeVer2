@@ -3,6 +3,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import { userRouter } from "./router";
 
 
 const app = express();
@@ -10,10 +11,9 @@ const app = express();
 
 
 
+const handleHome = (req, res) => res.send("Welcome Home");
 
 
-const handleHome = (req, res) => res.send("welcome to home");
-const handleProfile = (req, res) => res.send("your profile");
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -22,8 +22,7 @@ app.use(helmet());
 app.use(morgan("dev"));
 
 app.get("/", handleHome);
-app.get("/profile", handleProfile);
-
+app.use("/user", userRouter);
 
 
 

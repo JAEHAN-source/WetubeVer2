@@ -7,6 +7,7 @@ import globalRouter from "./globalRouter";
 import videoRouter from "./videoRouter";
 import userRouter from "./userRouter";
 import routes from "./routes";
+import { localsMiddleware } from "./middlewares";
 
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan("dev"));
+app.use(localsMiddleware);
 
 
 app.use(routes.home, globalRouter);
